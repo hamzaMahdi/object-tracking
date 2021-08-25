@@ -3,8 +3,8 @@ import cv2 # Computer vision library
 from random import randint # Handles the creation of random integers
  
 # Make sure the video file is in the same directory as your code
-file_prefix = 'clip9'
-filename = file_prefix + '.mov'
+file_prefix = 'trimmed_OR'
+filename = file_prefix + '.mp4'
 file_size = (1920,1080) # Assumes 1920x1080 mp4
  
 # We want to save the output to a video file
@@ -18,7 +18,7 @@ type_of_trackers = ['BOOSTING', 'MIL', 'KCF','TLD', 'MEDIANFLOW', 'GOTURN',
 # CSRT is accurate but slow. You can try others and see what results you get.            
 desired_tracker = 'MOSSE'
 # Generate a MultiTracker object    
-multi_tracker = cv2.MultiTracker_create()
+multi_tracker = cv2.cv2.legacy_MultiTracker() # or use cv2.MultiTracker_create()
  
 # Set bounding box drawing parameters
 from_center = False # Draw bounding box from upper left

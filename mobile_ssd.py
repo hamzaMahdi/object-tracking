@@ -1,18 +1,15 @@
-# Project: How to Detect Objects in Video Using MobileNet SSD in OpenCV
-# Author: Addison Sears-Collins
-# Date created: March 1, 2021
-# Description: Object detection using OpenCV
- 
+import sys
+
 import cv2 # Computer vision library
 import numpy as np # Scientific computing library 
  
 # Make sure the video file is in the same directory as your code
-filename = 'clip9.mov'
-file_size = (1920,1080) # Assumes 1920x1080 mp4
+filename = 'trimmed_OR.mp4'
+file_size = (1280,720)
  
 # We want to save the output to a video file
-output_filename = 'clip9_processed.mp4'
-output_frames_per_second = 20.0
+output_filename = 'trimmed_OR_processed.mp4'
+output_frames_per_second = 30.0
  
 RESIZED_DIMENSIONS = (300, 300) # Dimensions that SSD was trained on. 
 IMG_NORM_RATIO = 0.007843 # In grayscale a pixel can range between 0 and 255
@@ -47,11 +44,14 @@ def main():
   result = cv2.VideoWriter(output_filename,  
                            fourcc, 
                            output_frames_per_second, 
-                           file_size) 
-     
+                           file_size)
+
+  total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+  current_frame = 1 # start at the first frame
   # Process the video
   while cap.isOpened():
-         
+    print("video progress: %f%%   " % (round(current_frame*1.0/total_frames,5)*100), end='\r', flush=True)
+    current_frame+=1
     # Capture one frame at a time
     success, frame = cap.read() 
  
